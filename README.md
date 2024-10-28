@@ -6,4 +6,5 @@ en esta clase instalamos fithub , python y visual estudio code
 
 # class 2 
 En esta clase revisamos variables, operadores e iniciamos una programa de calculadora.
+Se realizaron ejercios para practicar programación.
 
