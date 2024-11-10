@@ -79,12 +79,15 @@ while True:
                         break
         else:
             print('No hay productos registrados')
+# mostrar inventario
     elif opcion=='3':
         if len(productos)>0:
             for i in range(len(productos)):
                 print(f'Producto :{productos[i]} Categoria : {Categorias[i]} Precio : {precios[i]} Cantidad : {cantidades[i]} Proveedor : {proveedores[i]} Fecha de ingreso : {fechas[i]}')
         else:
             print('No hay inventario registrado')
+
+# mostrar venta
     elif opcion=='4':
         if len(productoVentas)>0:
             print('\n Registro de ventas')
@@ -92,11 +95,14 @@ while True:
                 print(f'Producto : {productoVentas[i]} Cantidad Vendida : {cantidadVentas[i]} Total Ventas : {totalVentas[i]} Fecha de transacción : {fechaVentas[i]}')
         else:
             print('No se han realizado ventas')
+# mostrar total de ventas
     elif opcion=='5':
         if len(productoVentas)>0:
             print(f'\n Venta acumulada : ${ventaAcumulada}')
+# salir
     elif opcion=='6':
         print('Gracias por usar el programa inventario de mascotas')
         break
+# error en elleción de opción
     else:
         print('\n Elija una opción valida')
