@@ -100,8 +100,9 @@ def eliminarEstudiante():
         if nombreEstudiante==estudiante['nombre']:
             print(len(estudiantes))
             estudiantes.clear()
-            print(estudiantes
-                  )
+            print(estudiantes)
+
+# Cambio de docenta a curso
 
 # menu de inicio
 while True:
