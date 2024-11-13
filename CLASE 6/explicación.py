@@ -1,0 +1,17 @@
+nombres=['Juan','Sebastina','Melissa','Xiomara']
+print(type(nombres))
+print(nombres)
+print(nombres[0])
+print(nombres[1])
+print(nombres[-1])
+print(nombres[0:1])
+print(nombres[0:2])
+nombres.append('Chicharito')
+nombres.insert(0,'elizabeth')
+print(nombres)
+nombres.pop()
+print(nombres)
+nombres.pop()
+print(nombres)
+del nombres[0]
+print(nombres)
