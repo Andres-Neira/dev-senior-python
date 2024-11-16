@@ -6,7 +6,7 @@ class tareas:
         self.nombre = nombre
         self.fechaLimite = fechaLimite
         self.categorias = categorias
-        self.horesDedicadas = horasDedicadas
+        self.horasDedicadas = horasDedicadas
         pass
 # Funcion para agregar una tarea
 def agregarTarea(listaTareas):
@@ -64,10 +64,10 @@ def generarInforme(listaTareas):
         # escribir los detalles de la tarea en el archivo
         for tarea in listaTareas:
             archivo.write(f'Nombre : {tarea.nombre}\n')
-            archivo.write(f'\n Analisis de {tarea.nombre}')
-            archivo.write(f'\n Promedio de horas {promedio}')
-            archivo.write(f'Maximo de horas {maximo}')
-            archivo.write(f'Minimo de horas {minimo}')
+            archivo.write(f'\n fecha limite : {tarea.fechaLimite.strftime('%d/%m/%Y')}\n')
+            archivo.write(f'\n Categoria: {tarea.categorias}\n')
+            archivo.write(f'Horas dedicadas {tarea.horasDedicadas}\n')
+            archivo.write(f'\n')
     print(' informe generado como "informe_tareas.txt"')
 
 def menu():

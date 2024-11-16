@@ -1,0 +1,7 @@
+Nombre : a
+
+ fecha limite : 12/12/2024
+
+ Categoria: Personal
+Horas dedicadas [4.0, 5.0, 6.0]
+
