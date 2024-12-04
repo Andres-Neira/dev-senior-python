@@ -1,0 +1,5 @@
+Las variable pueden ser publicas , protegidas o privadas
+en python las variables son de la siguiente manera:
+# public
+# protegido = _variable
+# privado = __variable
