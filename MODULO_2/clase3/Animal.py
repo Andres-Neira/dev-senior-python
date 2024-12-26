@@ -7,7 +7,7 @@ class Animal:
         pass
 
 class Perro(Animal):
-    def __init__(self)
+    def __init__(self):
         pass
     def hablar(self):
         return f'El perro hace wou'
