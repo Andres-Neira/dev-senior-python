@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-
+# patron de observador estrategia
 class EstrategiaDescuento:
 
     @abstractmethod
