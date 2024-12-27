@@ -1,0 +1,9 @@
+#Los atributos:
+#    son las cualidadades o caracteristicas de un objeto:
+#        Atributos de LIbro : titulo autor, tema
+
+#Los metodos:
+#    Son las acciones que puede realizar el atributo:
+#        Carro: metodo acelerar- mueve el vehiculo, cada vez que el metodo acelera aumenta en 1 velocidad
+
+#Para declarar atributos se utiliza "def __init__(self, xxx, xxx)'
