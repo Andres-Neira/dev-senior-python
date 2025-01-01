@@ -4,14 +4,13 @@ Luego, implementa una clase `Inventario` que administre una lista de productos. 
 - Agregar un producto.
 - Mostrar la lista de productos.
 - Calcular el valor total del inventario.'''
-class Producto:
-    def __init__(self, nombre, precio):
-        self.nombre = nombre
-        self.precio = precio
-class Inventario(Producto):
+#class Producto:
+#    def __init__(self, nombre, precio):
+#        self.nombre = nombre
+#        self.precio = precio
+class Inventario:
 
-    def __init__(self,nombre,precio):
-        super().__init__(nombre, precio)
+    def __init__(self):
         self.inventario=[]
 
     def agregar_producto(self,producto):
@@ -25,5 +24,5 @@ class Inventario(Producto):
 
 
 
-producto1= Producto('leche',1500)
+#producto1= Producto('leche',1500)
 Inventario.agregar_producto('3')
