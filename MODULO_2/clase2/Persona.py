@@ -9,12 +9,14 @@ class Persona:
     def __mostrarCuenta(self):
         return f'Cuenta Bancaria : {self.__cuentabancaria}'
     def mostrarInformacionCompleta(self):
-        return self.__mostrarCuenta
+        return self.__mostrarCuenta()
 
 persona1= Persona('Andres Neira',25)
 print(persona1.nombre)
 print(persona1._edad)
+#print(persona1.__cuentabancaria) no se puede acceder directo
 print(persona1.mostrarInformacion())
+#print(persona1.__mostrarCuenta())
 print(persona1.mostrarInformacionCompleta())
 # public
 # protegido = _variable
