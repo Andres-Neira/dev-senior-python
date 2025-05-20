@@ -95,7 +95,7 @@ class SistemaVeterinaria:
 
             if not nombre_mascota or not especie or not raza or edad <=0:
                 raise ValueError('Detalles de la mascota invalidos')
-            
+
             mascota=RegistroMascota(nombre_mascota,especie,raza,edad)
             cliente.agregar_mascota(mascota)
 
@@ -128,6 +128,6 @@ class SistemaVeterinaria:
             if not servicio or not veterinario:
                 raise ValueError("Detalle de la cita invalidos")
             
-            
         except ValueError as e:
             print(f'Error : {e}')
+            a="c"
