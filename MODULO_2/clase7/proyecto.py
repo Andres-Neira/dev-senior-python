@@ -61,7 +61,7 @@ class CitaMascota(Cita):
 class SistemaVeterinaria:
     def __init__(self):
         self.clientes = []
-    
+
     def registrar_cliente(self):
         try:
 
@@ -127,7 +127,6 @@ class SistemaVeterinaria:
 
             if not servicio or not veterinario:
                 raise ValueError("Detalle de la cita invalidos")
-            
+
         except ValueError as e:
             print(f'Error : {e}')
-            a="c"
