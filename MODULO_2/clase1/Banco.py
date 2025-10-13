@@ -4,7 +4,6 @@ class Banco:
 
     def __init__(self, nombre):
         self.nombre = nombre
-    
     @classmethod
     def cambiarTasa(cls,nuevaTasa):
         cls.TASA_INTERES=nuevaTasa
