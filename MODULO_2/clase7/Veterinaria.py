@@ -77,6 +77,7 @@ class HistorialCitas:
 
     def modificarCita(self,cita):
         pass
+def AsociarMascota(self):
 
 veterinario1=Veterinario("Andres","3125830049","cr 13")
 veterinario1.mostrarInformacion()
