@@ -146,7 +146,7 @@ class SistemaVeterinaria:
             if not cliente:
                 raise ValueError('Cliente no encontrado')
 
-            mascota = next((m for m in self.clientes.mascotas if m.nombre == nombre_mascota),None)
+            mascota = next((m for m in cliente.mascotas if m.nombre == nombre_mascota),None)
             if not mascota:
                 raise ValueError('Mascota no encontrada')
 
@@ -155,8 +155,8 @@ class SistemaVeterinaria:
             print('Citas disponibles para actualizar : ')
 
             for i,Cita in enumerate(mascota.historial_citas):
-                print(f"{i+1} fecha : {Cita.fecha} Hora : {Cita.hora} Servicio : {Cita.servicio} Veterinario : {cita.veterinario}")
-            indice=int(input('Seleccione el número de la lista a actualizar : ').strip())
+                print(f"{i+1} fecha : {Cita.fecha} Hora : {Cita.hora} Servicio : {Cita.servicio} Veterinario : {Cita.veterinario}")
+            indice=int(input('Seleccione el número de la lista a actualizar : ').strip())-1
 
             if indice<0 or indice>=len(mascota.historial_citas):
                 raise ValueError("Selección invalida")
@@ -167,10 +167,10 @@ class SistemaVeterinaria:
             nuevo_veterianrio=input("Nuevo veterinario : ").strip()
 
             if nueva_fecha:
-                datetime.strptime(nueva_fecha,"%y-%m-%D")
+                datetime.strptime(nueva_fecha,"%Y-%m-%d")
                 Cita.actualizar(fecha =nueva_fecha)
             if nueva_hora:
-                datetime.strptime(nueva_hora,"%H-%M")
+                datetime.strptime(nueva_hora,"%H:%M")
                 Cita.actualizar(hora =nueva_hora)
             if nuevo_servicio:
                 Cita.actualizar(servicio =nuevo_servicio)
