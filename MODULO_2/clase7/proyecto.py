@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
 
+# Creación de clase persona, con el cual se va crear el cliente y el veterinario
 class Persona(ABC):
     def __init__(self, nombre, contacto,direccion):
         self.nombre=nombre
@@ -19,8 +20,9 @@ class Mascota(ABC):
         self.edad = edad
         self.historial_citas=[]
 
-    @abstractmethod
     def agregar_al_historial(self, detalles_servicio):
+        pass
+    def obtener_historial(self):
         pass
 class Cita(ABC):
     def __init__(self, fecha, hora, servicio, veterinario):
@@ -29,7 +31,6 @@ class Cita(ABC):
         self.servicio=servicio
         self.veterinario=veterinario
 
-    @abstractmethod
     def actualizar(self, **kwargs):
         pass
 
@@ -37,10 +38,10 @@ class Cita(ABC):
 class Cliente(Persona):
     def __init__(self, nombre, contacto,direccion):
         super().__init__(nombre, contacto,direccion)
-        self.mascota = []
+        self.mascotas = []
 
     def agregar_mascota(self, mascota):
-        self.mascota.append(mascota)
+        self.mascotas.append(mascota)
 
     def mostrar_informacion(self):
         return f'Cliente : {self.nombre} contacto : {self.contacto} direccion : {self.direccion}'
@@ -49,7 +50,7 @@ class RegistroMascota(Mascota):
     def agregar_al_historial(self, detalles_servicio):
         self.historial_citas.append(detalles_servicio)
 
-    def obtener_historia(self):
+    def obtener_historial(self):
         return self.historial_citas
 
 class CitaMascota(Cita):
@@ -65,15 +66,15 @@ class SistemaVeterinaria:
     def registrar_cliente(self):
         try:
 
-            nombre= input('Ingrese el nombre del cliente').strip()
-            contacto = input('Ingrese el contacto :').strip()
-            direccion = input('Ingrese la direccion ').strip()
+            nombre= input('Ingrese el nombre del cliente : ').strip()
+            contacto = input('Ingrese el contacto : ').strip()
+            direccion = input('Ingrese la direccion : ').strip()
             if not nombre or not contacto or not direccion:
-                raise ValueError('Todos los datos son obligatorios')
+                raise ValueError('¡ Todos los datos son obligatorios !')
 
             cliente = Cliente(nombre, contacto, direccion)
             self.clientes.append(cliente)
-            print('Cliente registrado con exito!')
+            print(' Cliente registrado con exito !!')
 
         except ValueError as e:
             print(f'Error :{e}')
@@ -82,11 +83,11 @@ class SistemaVeterinaria:
     def registrar_mascota(self):
         try:
 
-            nombre_cliente = input('Ingrese nombre dle cliente al que asociar la mascota').strip()
+            nombre_cliente = input('Ingrese nombre del cliente al que se le va a asociar la mascota : ').strip()
             cliente = next((c for c in self.clientes if c.nombre == nombre_cliente),None)
 
             if not cliente:
-                raise ValueError('Cliente no encontrado')
+                raise ValueError(' Cliente no encontrado ')
 
             nombre_mascota=input('Ingrese el nombre de la mascota : ').strip()
             especie = input('Ingrese la especie : ').strip()
@@ -98,28 +99,29 @@ class SistemaVeterinaria:
 
             mascota=RegistroMascota(nombre_mascota,especie,raza,edad)
             cliente.agregar_mascota(mascota)
+            print(f"Mascota {mascota.nombre} se registro con exito al cliente {cliente.nombre}")
 
         except ValueError as e:
             print(f'Error : {e}')
     def programar_cita(self):
         try:
 
-            nombre_cliente=input('Ingres el nombre del cliente al que asociar la mascota : ').strip()
-            nombre_mascota=input('Ingres el nombre de la mascota : ').strip()
+            nombre_cliente=input('Ingrese el nombre del cliente al que asociar la mascota : ').strip()
+            nombre_mascota=input('Ingrese el nombre de la mascota : ').strip()
 
 
             cliente = next((c for c in self.clientes if c.nombre == nombre_cliente),None)
             if not cliente:
-                raise ValueError('Cliente no encontrado')
+                raise ValueError(' Cliente no encontrado ')
 
-            mascota = next((m for m in self.cliente.mascotas if m.nombre == nombre_mascota),None)
+            mascota = next((m for m in cliente.mascotas if m.nombre == nombre_mascota),None)
             if not mascota:
-                raise ValueError('Mascota no encontrada')
+                raise ValueError(' Mascota no encontrada ')
 
-            fecha = input('Ingrese la fecha (AAA-MM-DD)').strip()
-            hora = input('Ingrese la hora (hh:mm)').strip()
-            servicio = input('Ingres el servicio (consulta , vacunación, etc)').strip()
-            veterinario= input('Ingrese el nombre del veterinario').strip()
+            fecha = input(' Ingrese la fecha (AAAA-MM-DD) : ').strip()
+            hora = input('Ingrese la hora (hh:mm) : ').strip()
+            servicio = input('Ingrese el servicio (consulta , vacunación, etc) : ').strip()
+            veterinario= input('Ingrese el nombre del veterinario : ').strip()
 
 
             datetime.strptime(fecha,"%Y-%m-%d")
@@ -128,28 +130,32 @@ class SistemaVeterinaria:
             if not servicio or not veterinario:
                 raise ValueError("Detalle de la cita invalidos")
 
+            cita=CitaMascota(fecha,hora,servicio,veterinario)
+            mascota.agregar_al_historial(cita)
+            print("cita programada con exito")
+
         except ValueError as e:
             print(f'Error : {e}')
     def ActualizaCita(self):
         try:
-            nombre_cliente=input('Ingres el nombre del cliente al que asociar la mascota : ').strip()
-            nombre_mascota=input('Ingres el nombre de la mascota : ').strip()
+            nombre_cliente=input('Ingrese el nombre del cliente al que asociar la mascota : ').strip()
+            nombre_mascota=input('Ingrese el nombre de la mascota : ').strip()
 
 
             cliente = next((c for c in self.clientes if c.nombre == nombre_cliente),None)
             if not cliente:
                 raise ValueError('Cliente no encontrado')
 
-            mascota = next((m for m in self.cliente.mascotas if m.nombre == nombre_mascota),None)
+            mascota = next((m for m in self.clientes.mascotas if m.nombre == nombre_mascota),None)
             if not mascota:
                 raise ValueError('Mascota no encontrada')
 
             if not mascota.historial_citas:
                 raise ValueError('No hay citas registradas para las mascotas')
-            print('Citas disponibles para actualizar :')
+            print('Citas disponibles para actualizar : ')
 
             for i,Cita in enumerate(mascota.historial_citas):
-                print(f"{i+1} fecha : {Cita.fecha} Hora{Cita.hora} Servicio : {Cita.servicio} Veterinario: {cita.veterinario}")
+                print(f"{i+1} fecha : {Cita.fecha} Hora : {Cita.hora} Servicio : {Cita.servicio} Veterinario : {cita.veterinario}")
             indice=int(input('Seleccione el número de la lista a actualizar : ').strip())
 
             if indice<0 or indice>=len(mascota.historial_citas):
@@ -158,7 +164,7 @@ class SistemaVeterinaria:
             nueva_fecha=input(" Nueva fecha (AAAA-MM-DD) : ").strip()
             nueva_hora=input(" Nueva hora (HH:MM) : ").strip()
             nuevo_servicio=input("Nuevo servicio : ").strip()
-            nuevo_veterianrio=input("Nuevo veterinario").strip()
+            nuevo_veterianrio=input("Nuevo veterinario : ").strip()
 
             if nueva_fecha:
                 datetime.strptime(nueva_fecha,"%y-%m-%D")
@@ -176,19 +182,19 @@ class SistemaVeterinaria:
         except ValueError as e:
             print(f"Error _ {e}")
     
-    def consultarCita(self):
+    def consultar_Cita(self):
 
         try:
 
-            nombre_cliente=input('Ingres el nombre del cliente al que asociar la mascota : ').strip()
-            nombre_mascota=input('Ingres el nombre de la mascota : ').strip()
+            nombre_cliente=input('Ingrese el nombre del cliente al que asociar la mascota : ').strip()
+            nombre_mascota=input('Ingrese el nombre de la mascota : ').strip()
 
 
             cliente = next((c for c in self.clientes if c.nombre == nombre_cliente),None)
             if not cliente:
                 raise ValueError('Cliente no encontrado')
 
-            mascota = next((m for m in self.cliente.mascotas if m.nombre == nombre_mascota),None)
+            mascota = next((m for m in cliente.mascotas if m.nombre == nombre_mascota),None)
             if not mascota:
                 raise ValueError('Mascota no encontrada')
             historial=mascota.obtener_historial()
@@ -197,24 +203,46 @@ class SistemaVeterinaria:
 
             else:
                 for entrada in historial:
-                    print(f" Fecha :{entrada.fecha} Hora {entrada.fecha} Servicio {entrada.servicio} veterinario {entrada.veterinario}")
+                    print(f" Fecha : {entrada.fecha} Hora : {entrada.fecha} Servicio : {entrada.servicio} veterinario : {entrada.veterinario}")
         except ValueError as e:
             print(f" Error : {e}")
         
-        def iniciar(self):
-            while True:
-                print("\n Sitema veterinaria")
-                print("1. Registrar cliente")
-                print("2. registrar Mascota")
-                print("3. Programa cita")
-                print("4. Actualizar Cita")
-                print("5. COnsultar Cita")
-                print("6. Salir")
-                
-                opcion=input("Ingrese su opcion").strip()
+    def Iniciar(self):
+        while True:
+            print("\n Sistema veterinaria")
+            print("1. Registrar cliente")
+            print("2. registrar Mascota")
+            print("3. Programa cita")
+            print("4. Actualizar Cita")
+            print("5. COnsultar Cita")
+            print("6. Salir")
 
-                if opcion == "1":
-                    self.registrar_cliente()
-                elif opcion=="2":
-                    self.registrar_mascota()
-                elif opcion==
+            opcion=input("Ingrese su opcion : ").strip()
+
+            if opcion == "1":
+                self.registrar_cliente()
+            elif opcion=="2":
+                self.registrar_mascota()
+            elif opcion=="3":
+                self.programar_cita()
+            elif opcion=="4":
+                self.ActualizaCita()
+            elif opcion=="5":
+                self.consultar_Cita()
+            elif opcion =="6":
+                print("-----------Sistema Cerrado---------------")
+                break
+            else:
+                print("Valor no valido , digite alguna de las opciones anteriores")
+
+if __name__=="__main__":
+    sistema= SistemaVeterinaria()
+    sistema.Iniciar()
+#Cliente1=Cliente("ASAS","ASDAD","SDAD")
+#Mascota2=RegistroMascota("perrito","Perrito","SAD",25)
+#Cliente1.agregar_mascota(Mascota2)
+#cita1=Cita("2025-02-04","22:03","Consulta","Juan")
+#Mascota2.agregar_al_historial(cita1)
+#for m in
+#print(Mascota2.obtener_historial())
+#print(Mascota2.historial_citas())
