@@ -154,13 +154,18 @@ class SistemaVeterinaria:
                 raise ValueError('No hay citas registradas para las mascotas')
             print('Citas disponibles para actualizar : ')
 
-            for i,Cita in enumerate(mascota.historial_citas):
-                print(f"{i+1} fecha : {Cita.fecha} Hora : {Cita.hora} Servicio : {Cita.servicio} Veterinario : {Cita.veterinario}")
+            for i,cita in enumerate(mascota.historial_citas):
+                encabezados=("#","Fecha","Hora","Servicio","Veterinario")
+                data=[[i+1,cita.fecha,cita.hora,cita.servicio,cita.veterinario]]
+                print(tabulate(data,encabezados,tablefmt="fancy_grid"))
+#                print(f"{i+1} fecha : {cita.fecha} Hora : {cita.hora} Servicio : {cita.servicio} Veterinario : {cita.veterinario}")
             indice=int(input('Seleccione el número de la lista a actualizar : ').strip())-1
 
             if indice<0 or indice>=len(mascota.historial_citas):
                 raise ValueError("Selección invalida")
             print("Deje en blanco los campos que no desa actualizar")
+            cita_seleccionada=mascota.historial_citas[indice]
+            
             nueva_fecha=input(" Nueva fecha (AAAA-MM-DD) : ").strip()
             nueva_hora=input(" Nueva hora (HH:MM) : ").strip()
             nuevo_servicio=input("Nuevo servicio : ").strip()
@@ -168,15 +173,16 @@ class SistemaVeterinaria:
 
             if nueva_fecha:
                 datetime.strptime(nueva_fecha,"%Y-%m-%d")
-                Cita.actualizar(fecha =nueva_fecha)
+                cita_seleccionada.actualizar(fecha =nueva_fecha)
             if nueva_hora:
                 datetime.strptime(nueva_hora,"%H:%M")
-                Cita.actualizar(hora =nueva_hora)
+                cita_seleccionada.actualizar(hora =nueva_hora)
             if nuevo_servicio:
-                Cita.actualizar(servicio =nuevo_servicio)
+                cita_seleccionada.actualizar(servicio =nuevo_servicio)
             if nuevo_veterianrio:
-                Cita.actualizar(veterinario =nuevo_veterianrio)
+                cita_seleccionada.actualizar(veterinario =nuevo_veterianrio)
             print(" Cita actualizada con exito")
+
 
 
         except ValueError as e:
@@ -203,7 +209,9 @@ class SistemaVeterinaria:
 
             else:
                 for entrada in historial:
-                    print(f" Fecha : {entrada.fecha} Hora : {entrada.fecha} Servicio : {entrada.servicio} veterinario : {entrada.veterinario}")
+                    encabezados=["Fecha","Hora","Servicio","Veterinario"]
+                    datos=[[entrada.fecha,entrada.hora,entrada.servicio,entrada.veterinario]]
+                    print(tabulate(datos,encabezados,tablefmt="grid"))
         except ValueError as e:
             print(f" Error : {e}")
         
@@ -238,11 +246,3 @@ class SistemaVeterinaria:
 if __name__=="__main__":
     sistema= SistemaVeterinaria()
     sistema.Iniciar()
-#Cliente1=Cliente("ASAS","ASDAD","SDAD")
-#Mascota2=RegistroMascota("perrito","Perrito","SAD",25)
-#Cliente1.agregar_mascota(Mascota2)
-#cita1=Cita("2025-02-04","22:03","Consulta","Juan")
-#Mascota2.agregar_al_historial(cita1)
-#for m in
-#print(Mascota2.obtener_historial())
-#print(Mascota2.historial_citas())
