@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
+from tabulate import tabulate
 
 # Creación de clase persona, con el cual se va crear el cliente y el veterinario
 class Persona(ABC):
